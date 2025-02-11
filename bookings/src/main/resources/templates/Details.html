@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Apartment Details</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>Price</th>
+                <th>Amenities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:object="${apartment}">
+                <td>
+                <img th:src="*{images.picture_url}" width="150">
+                </td>
+                <td th:text="*{_id}"></td>
+                <td th:text="*{description}"></td>
+                <td th:text="*{address.street}"></td>
+                <td th:text="*{price}"></td>
+                <td>
+                    <ul>
+                        <li th:each="amenity : *{amenities}" th:text="${amenity}"></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <form method="POST" action="/book" th:object="${booking}">
+
+        <input type="hidden" name="acc_id" th:value="${acc_id}">
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" th:field="*{name}">
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" th:field="*{email}">
+
+        <label for="arrival">Arrival</label>
+        <input type="date" name="arrival" id="arrival" th:field="*{arrivalDate}">
+
+        <label for="duration">Duration</label>
+        <input type="number" name="duration" id="duration" th:field="*{duration}">
+
+        <button type="submit">Submit</button>
+
+    </form>
+    
+
+</body>
+</html>

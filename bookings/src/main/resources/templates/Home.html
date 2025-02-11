@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Search Our Accomodation</h2>
+    <form method="POST" action="/submit" th:object="${accomodation}" >
+
+        <label for="country">Select a Country:</label>
+            <select name="country" th:field="*{country}">
+                <option th:each="country : ${countries}" th:value="${country}" th:text="${country}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p>   
+            <br></br>
+
+        <label for="size">Number of person:</label>
+            <input type="number" name="size" id="size" th:field="*{size}">
+            <p th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></p>   
+            <br></br>
+
+        <label for="pricerange">Price Range:</label>
+
+            <span>Min</span>
+            <input type="number" name="min" id="pricerange" step="any" th:field="*{minPrice}">
+            <p th:if="${#fields.hasErrors('minPrice')}" th:errors="*{minPrice}"></p>  
+
+            <span>Max</span>
+            <input type="number" name="max" id="pricerange" step="any" th:field="*{maxPrice}">
+            <p th:if="${#fields.hasErrors('maxPrice')}" th:errors="*{maxPrice}"></p>  
+            <br></br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    
+</body>
+</html>
